@@ -1,15 +1,17 @@
 <template>
   <div>
-    <h3>
-      <span :style="{marginRight: '10px', cursor: 'pointer'}">
-        <font-awesome-icon icon="arrow-left" @click="$router.back()" />
+    <h3 @click="$router.back()" :style="{cursor: 'pointer'}">
+      <span :style="{marginRight: '10px'}">
+        <font-awesome-icon icon="arrow-left" />
       </span>
       <span>Todo details</span>
     </h3>
 
     <div v-if="todo" class="todo">
-      <h4>{{todo.title}}</h4>
-      <!-- <p>{{todo.id}}</p> -->
+      <div>
+        <h4>{{todo.title}}</h4>
+      </div>
+      <p>{{todo.completed}}</p>
     </div>
   </div>
 </template>
