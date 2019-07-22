@@ -2,7 +2,13 @@
   <div>
     <h2>Todos</h2>
     <div class="todos">
-      <div class="todo" v-for="todo in allTodos" :key="todo.id">
+      <div
+        @dblclick="onDblClick(todo)"
+        class="todo"
+        :class="{'is-complete': todo.completed}"
+        v-for="todo in allTodos"
+        :key="todo.id"
+      >
         {{ todo.title }}
         <font-awesome-icon icon="trash-alt" @click="deleteTodo(todo.id)" />
       </div>
@@ -16,7 +22,15 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Todos',
   methods: {
-    ...mapActions(['fetchTodos', 'deleteTodo']),
+    ...mapActions(['fetchTodos', 'deleteTodo', 'updateTodo']),
+    onDblClick(todo) {
+      const updatedTodo = {
+        ...todo,
+        completed: !todo.completed,
+      }
+
+      this.updateTodo(updatedTodo)
+    },
   },
   created() {
     this.fetchTodos()
@@ -42,11 +56,21 @@ export default {
   cursor: pointer;
 }
 
+.is-complete {
+  background: darkslateblue;
+}
+
 svg {
   position: absolute;
   bottom: 10px;
   right: 10px;
   color: #fff;
   cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .todos {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
