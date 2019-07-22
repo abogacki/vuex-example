@@ -10,7 +10,12 @@
         :key="todo.id"
       >
         {{ todo.title }}
-        <font-awesome-icon icon="trash-alt" @click="deleteTodo(todo.id)" />
+        <span class="icons">
+          <font-awesome-icon icon="trash-alt" @click="deleteTodo(todo.id)" />
+          <router-link :to="{path: `details/${todo.id}`}">
+            <font-awesome-icon icon="directions" />
+          </router-link>
+        </span>
       </div>
     </div>
   </div>
@@ -60,12 +65,22 @@ export default {
   background: darkslateblue;
 }
 
-svg {
+.icons {
   position: absolute;
+  display: flex;
   bottom: 10px;
   right: 10px;
-  color: #fff;
   cursor: pointer;
+  justify-content: flex-end;
+  color: #fff;
+}
+
+.icons > svg {
+  margin: 3px;
+}
+
+.icons > a {
+  color: inherit;
 }
 
 @media (max-width: 500px) {

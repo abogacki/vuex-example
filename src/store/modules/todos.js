@@ -6,6 +6,10 @@ const state = {
 
 const getters = {
   allTodos: state => state.todos,
+  getTodoById: state => id => {
+    console.log(state.todos)
+    return state.todos.find(todo => todo.id == id)
+  },
 }
 
 const actions = {
